@@ -13,4 +13,27 @@
 	SELECT * FROM MEMBER WHERE ID = #{id} AND PWD = #{pwd} AND DEL_YN = 'N'
 </select>
 
+<update id="edit">
+	UPDATE MEMBER 
+		SET 
+		<trim prefixOverrides=",">
+			<if test=" pwd != null and pwd != '' ">
+				PWD = #{pwd}
+			</if>
+			<if test=" nick != null and nick != '' ">
+				, NICK = #{nick}
+			</if>
+		</trim>
+		WHERE NO = #{no}
+		AND DEL_YN = 'N'
+</update>
+
+<update id="quit">
+	UPDATE MEMBER SET DEL_YN = 'Y' WHERE NO = #{no}
+</update>
+
+<select id="list" resultType="MemberVo">
+	SELECT * FROM MEMBER
+</select>
+
 </mapper>

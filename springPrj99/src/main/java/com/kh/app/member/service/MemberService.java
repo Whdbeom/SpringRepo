@@ -1,5 +1,7 @@
 package com.kh.app.member.service;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,18 @@ public class MemberService {
 
 	public MemberVo login(MemberVo vo) {
 		return dao.login(vo, sst);
+	}
+
+	public int edit(MemberVo vo) {
+		return dao.edit(vo, sst);
+	}
+
+	public int quit(MemberVo vo) {
+		return dao.quit(vo, sst);
+	}
+
+	public List<MemberVo> list() {
+		return dao.list(sst);
 	}
 
 }

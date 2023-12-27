@@ -5,6 +5,32 @@
 
 <mapper namespace="BoardMapper">
 
+<insert id="write">
+	INSERT INTO BOARD(NO, TITLE, CONTENT, WRITER_NO) VALUES (SEQ_BOARD_NO.NEXTVAL, #{title}, #{content}, #{writerNo})
+</insert>
 
+<select id="list" resultType="BoardVo">
+	SELECT * FROM BOARD WHERE DEL_YN = 'N' 
+</select>
+
+
+<update id="delete">
+	UPDATE BOARD SET DEL_YN = 'Y' WHERE BOARD_NO = #{boardNo}
+</update>
+
+<update id="edit">
+	UPDATE BOARD
+		SET
+		<trim prefixOverrides=",">
+			<if test="title != null and title != ''">
+				TITLE = #{title}
+			</if>
+			<if test="content != null and content != ''">
+				,CONTENT = #{content}
+			</if>
+		</trim>
+		WHERE NO = #{no}
+		AND DEL_YN = 'N'
+</update>
 
 </mapper>

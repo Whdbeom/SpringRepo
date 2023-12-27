@@ -1,5 +1,7 @@
 package com.kh.app.member.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -14,6 +16,18 @@ public class MemberDao {
 
 	public MemberVo login(MemberVo vo, SqlSessionTemplate sst) {
 		return sst.selectOne("MemberMapper.login", vo);
+	}
+
+	public int edit(MemberVo vo, SqlSessionTemplate sst) {
+		return sst.update("MemberMapper.edit", vo);
+	}
+
+	public int quit(MemberVo vo, SqlSessionTemplate sst) {
+		return sst.update("MemberMapper.quit", vo);
+	}
+
+	public List<MemberVo> list(SqlSessionTemplate sst) {
+		return sst.selectList("MemberMapper.list");
 	}
 
 }
